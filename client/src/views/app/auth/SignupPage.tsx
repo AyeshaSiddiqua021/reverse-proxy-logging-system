@@ -9,7 +9,7 @@ export const SignupPage = () => {
           <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
              <User className="size-4" />
           </div>
-         Ability AI
+         Ability Ltd
         </a>
         <AuthForm mode="register" />
       </div>
