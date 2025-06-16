@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import cors from "cors"; // 👈 import cors
+import cors from "cors"; 
 import cookieParser from "cookie-parser";
 import connectToDatabase from "./config/db";
 import { APP_ORIGIN, NODE_ENV, PORT } from "./constants/env";
@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   res.status(OK).json({ status: "healthy" });
 });
 
-// auth routes
+//  routes
 app.use("/auth", authRoutes);
 app.use('/proxy',proxyRoutes);
 
