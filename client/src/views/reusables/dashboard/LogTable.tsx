@@ -120,7 +120,7 @@ export const LogTable = ({
                           <Checkbox
                             checked={log.isEnabled || false}
                             onCheckedChange={async (checked) => {
-                              await handleToggleLog(log.originalUrl, !!checked);
+                              await handleToggleLog( !!checked);
                               setLogs((prevLogs: Log[]) =>
                                 prevLogs.map((l: Log, i: number) =>
                                   i === index ? { ...l, isEnabled: !!checked } : l

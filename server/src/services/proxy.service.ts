@@ -8,14 +8,14 @@ export const createProxyLog = async (
 ): Promise<IProxyLog> => {
   appAssert(logData.user, BAD_REQUEST, "User ID is required");
   appAssert(logData.originalUrl, BAD_REQUEST, "Original URL is required");
-
-  const latestEnabledLog = await ProxyLog.findOne({ user: logData.user })
+  const existingLog = await ProxyLog.findOne({ user: logData.user })
     .sort({ timestamp: -1 })
     .select("isEnabled");
 
-  if (!latestEnabledLog || latestEnabledLog.isEnabled === false) {
+  if (existingLog && existingLog.isEnabled === false) {
     throw new Error("Proxy Log is disabled");
   }
+
   const log = await ProxyLog.create(logData);
   return log;
 };
@@ -48,6 +48,9 @@ export const enableProxyLog = async (
   enabled: boolean
 ): Promise<{ modifiedCount: number }> => {
   appAssert(userId, BAD_REQUEST, "User ID is required");
+
+console.log('asds',userId);
+
   const result = await ProxyLog.updateMany(
     { user: userId },
     { $set: { isEnabled: enabled } }
